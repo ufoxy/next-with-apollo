@@ -1,10 +1,38 @@
 // ./apollo-client.js
 
-import { ApolloClient, InMemoryCache } from "@apollo/client";
+const { ApolloServer } = require("@apollo/server");
+const { startStandaloneServer } = require("@apollo/server/standalone");
 
-const client = new ApolloClient({
-    uri: "https://countries.trevorblades.com",
-    cache: new InMemoryCache(),
+const typeDefs = `#graphql
+  type Book {
+    title: String
+    author: String
+  }
+
+  type Query {
+    books: [Book]
+  }
+`;
+
+const books = fetch("http://localhost:3000/api/books").then((e) => e.data);
+
+const resolvers = {
+  Query: {
+    books: () => books,
+  },
+};
+
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
 });
 
-export default client;
+async function ss() {
+  return startStandaloneServer(server, {
+    listen: { port: 4000 },
+  });
+}
+
+ss().then((e) =>
+  console.log(`🚀  Apollo Server ready at: ${e.url}`)
+);
