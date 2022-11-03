@@ -6,7 +6,7 @@ import axios from "axios";
 import { useQuery } from "@apollo/client";
 import INFO_BOOKS from "../src/querys/books";
 
-const API_URL = "http://localhost:3000/api/books"
+const API_URL = "http://localhost:4000"
 
 export default function Home() {
 
