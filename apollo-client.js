@@ -14,7 +14,7 @@ const typeDefs = `#graphql
   }
 `;
 
-const books = fetch("http://localhost:3000/api/books").then((e) => e.data);
+const books = {}
 
 const resolvers = {
   Query: {
