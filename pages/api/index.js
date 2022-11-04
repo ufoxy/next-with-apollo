@@ -1,7 +1,7 @@
 const { ApolloServer } = require('apollo-server')
-const characterSchema = require('./user/schema/character.graphql')
-const characterResolvers = require('./user/resolvers/characterResolvers')
-const CharacterAPI = require('./user/datasource/character')
+const characterSchema = require('./character/schema/character.graphql')
+const characterResolvers = require('./character/resolvers/characterResolvers')
+const CharacterAPI = require('./character/datasource/character')
 
 const typeDefs = [characterSchema]
 const resolvers = [characterResolvers]
@@ -11,7 +11,7 @@ const server = new ApolloServer( {
   resolvers,
   dataSources: () => {
     return {
-      usersAPI: new CharacterAPI()
+      CharactersAPI: new CharacterAPI()
     }
   }
 } )
