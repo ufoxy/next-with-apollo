@@ -1,10 +1,10 @@
 const { gql } = require('apollo-server')
 
-const userSchema = gql `
+const characterSchema = gql `
 
 scalar DateTime
 
-  type User {
+  type Character {
       name: String!
       status: String!
       species: String!
@@ -29,10 +29,10 @@ scalar DateTime
   }
 
   type Query {
-    users: [User]
-    user(id: ID!): User!
+    characters: [Character]
+    character(id: ID!): Character!
   }
 
 `
 
-module.exports = userSchema
+module.exports = characterSchema
