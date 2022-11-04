@@ -1,7 +1,7 @@
 const userResolvers = {
   Query: {
-    users: (root, args, { dataSources }) => dataSources.usersAPI.getCharacters(),
-    user: (root, { id }, { dataSources }) => dataSources.usersAPI.getCharacterById(id)
+    characters: (root, args, { dataSources }) => dataSources.CharactersAPI.getCharacters(),
+    character: (root, { id }, { dataSources }) => dataSources.CharactersAPI.getCharacterById(id)
   }
 }
 
