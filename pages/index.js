@@ -4,7 +4,6 @@ import styles from "../styles/Home.module.css";
 import axios from "axios";
 
 import { useQuery } from "@apollo/client";
-import INFO_BOOKS from "../src/querys/books";
 
 const API_URL = "http://localhost:4000"
 
