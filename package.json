@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "concurrently --kill-others \"next dev\" \"npm run apollo\"",
+    "updater": "node ./pages/api/character/apiUpdater.js",
     "apollo": "nodemon -e js,json,graphql ./pages/api/index.js",
     "build": "next build",
     "start": "next start",
