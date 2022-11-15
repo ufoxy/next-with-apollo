@@ -3,10 +3,6 @@ const mongoose = require("mongoose");
 const { ApolloServer } = require("apollo-server");
 const typeDefs = require("./character/typeDefs/index");
 const resolvers = require("./character/resolvers/characterResolvers");
-// const CharacterAPI = require('./character/datasource/character')
-
-// const typeDefs = [characterSchema]
-// const resolvers = [characterResolvers]
 
 // Database
 const db = {
