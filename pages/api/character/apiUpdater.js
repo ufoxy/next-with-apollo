@@ -12,23 +12,68 @@ async function makeRequest() {
 
   let res = await axios(config);
 
-    // console.log(...res.data.results)
+  // console.log(...res.data.results)
 
-      for (var i = 1; i <= res.data.info.pages; i++) {
-      console.log(i);
+  for (var i = 1; i <= res.data.info.pages; i++) {
+    console.log(i);
 
-      const config = {
-          method: "get",
-          url: `https://rickandmortyapi.com/api/character?page=${i}`,
-        };
+    const config = {
+      method: "get",
+      url: `https://rickandmortyapi.com/api/character?page=${i}`,
+    };
 
-        let res = await axios(config);
+    let res = await axios(config);
 
-        characters.push(...res.data.results.map(e => e.name))
-        // characters.push(...res.data.results)
+    characters.push(
+      ...res.data.results.map((character) => {
+
+        axios
+        .post("http://localhost:4000/", {
+          query: `
+        mutation createCharacter {
+          createCharacter (character: { 
+            id: character.id,
+            name: character.name,
+            status: character.status,
+            species: character.species,
+            type: character.type,
+            gender: character.gender,
+            origin: character.origin,
+            location: character.location,
+            image: character.image,
+            episode: character.episode,
+            url: character.url,
+            created: character.created, }) {
+            name
+          }
+        }
+      `,
+          variables: {},
+        })
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err));
+
+
+        // return {
+        //   id: character.id,
+        //   name: character.name,
+        //   status: character.status,
+        //   species: character.species,
+        //   type: character.type,
+        //   gender: character.gender,
+        //   origin: character.origin,
+        //   location: character.location,
+        //   image: character.image,
+        //   episode: character.episode,
+        //   url: character.url,
+        //   created: character.created,
+        // };
+      })
+    );
+    // characters.push(...res.data.results)
   }
 
-  return characters;
+  // return characters;
 }
 
 async function res() {
