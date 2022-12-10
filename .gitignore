@@ -103,6 +103,9 @@ dist
 .temp
 .cache
 
+# Ignore files related to API keys
+.env
+
 # Docusaurus cache and generated files
 .docusaurus
 
