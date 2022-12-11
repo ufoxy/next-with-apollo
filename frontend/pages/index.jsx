@@ -6,17 +6,15 @@ import styles from "../styles/Home.module.css";
 import logo from "../public/tt.png";
 import { VscGithub } from "react-icons/vsc";
 import { IoPlanet } from "react-icons/io5";
-import { HiRefresh } from "react-icons/hi"
-import { TbSearch } from "react-icons/tb"
+import { HiRefresh } from "react-icons/hi";
+import { TbSearch } from "react-icons/tb";
 
 import Card from "../components/card.jsx";
 
-import Dropdown from 'react-dropdown';
-import 'react-dropdown/style.css';
+import Dropdown from "react-dropdown";
+import "react-dropdown/style.css";
 
-const options = [
-  'Ordem de Aparição', 'A-Z', 'Z-A'
-];
+const options = ["Ordem de Aparição", "A-Z", "Z-A"];
 
 const defaultOption = options[0];
 
@@ -54,14 +52,20 @@ export default function Home() {
               className={styles.search_bar}
               placeholder="Search"
             />
-            <button className={styles.button_search} role="button"><TbSearch fontSize={20}/></button>
+            <button className={styles.button_search} role="button">
+              <TbSearch fontSize={20} />
+            </button>
           </div>
 
           <div className={styles.dropdown_container}>
             <p className={styles.dropdown_p}>Organizar por:</p>
-            <Dropdown options={options} value={defaultOption} placeholder="Select an option" className={styles.dropdown} />
+            <Dropdown
+              options={options}
+              value={defaultOption}
+              placeholder="Select an option"
+              className={styles.dropdown}
+            />
           </div>
-
         </section>
         <section className={styles.section}>
           <Card />
