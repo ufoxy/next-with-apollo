@@ -9,7 +9,7 @@ app.use(express.json());
 app.use("/app", appRoute);
 
 app.get("/", (req, res) => {
-  res.status(200).json({ msg: "Welcome to API!" });
+  return res.status(200).json({ msg: "Welcome to API!" });
 });
 
 app.listen(8000, () => {
