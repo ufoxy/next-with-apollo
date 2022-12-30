@@ -3,7 +3,7 @@
     flex-direction: column;
     justify-content: space-between;
 
-    width: 280px;
+    width: 250px;
     background-color: rgb(255, 255, 255);
 
     border-radius: 15px;
@@ -14,6 +14,17 @@
 
     box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
     border: 1px solid #1e1e1e;
+}
+
+.flex {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.circle {
+    font-size: 15px;
+    padding-top: 2px;
 }
 
 .article:hover {
@@ -41,6 +52,9 @@
 
     transform: scale(1.00015);
     border-bottom: 2px solid #1e1e1e;
+
+    width: 250px;
+    height: 250px;
 
     z-index: 1;
 
