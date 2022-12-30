@@ -2,6 +2,7 @@
   width: 100%;
   height: calc(428px + 75px);
   overflow: hidden;
+  
 }
 
 .nav {
@@ -89,6 +90,7 @@
   /* height: 130vh; */
   /* box-shadow: 0 20px 10px -20px rgba(0,0,0,0.45) inset; */
   box-shadow: 0 20px 10px -20px rgba(0,0,0,0.45) inset, 0 -20px 10px -20px rgba(0,0,0,0.45) inset;
+
 }
 
 .section {
@@ -105,8 +107,6 @@
   background-color: rgb(244, 244, 244);
   border-bottom-left-radius: 1.45%;
   border-bottom-right-radius: 1.45%;
-  
-  
 }
 
 
@@ -118,6 +118,8 @@
   padding: 0 137px;
   
   background-color: rgb(56, 56, 56);
+
+  
 }
 
 .search_container {
@@ -204,8 +206,12 @@
 
 .footer {
   width: 100%;
-  height: 50px;
-  background-color: #75e266;
+  height: 150px;
+  background-color: #1e1e1e;
+
+  background: url(../public/space.png);
+  background-repeat: repeat;
+  background-size: contain;
 }
 
 /* -------------- */
