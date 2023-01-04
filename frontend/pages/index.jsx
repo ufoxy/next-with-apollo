@@ -8,7 +8,7 @@ import { VscGithub } from "react-icons/vsc";
 import { IoPlanet } from "react-icons/io5";
 import { HiRefresh } from "react-icons/hi";
 import { TbSearch } from "react-icons/tb";
-import axios from "axios"
+import axios from "axios";
 
 import Card from "../components/card.jsx";
 
@@ -19,21 +19,20 @@ const options = ["Ordem de Aparição", "A-Z", "Z-A"];
 
 const defaultOption = options[0];
 
-// export async function getServerSideProps() {
-//   // Call an external API endpoint to get posts
-//   const res = await axios.get('http://localhost:8000/')
-//   const characters = res.data
+export async function getStaticProps() {
 
-//   console.log(characters)
+  const res = await fetch('https://rick-and-morty-backend.vercel.app/app/characters/1')
+  const characters = await res.json()
 
-//   return {
-//     props: {
-//       characters,
-//     },
-//   }
-// }
+  return {
+    props: {
+      characters,
+    },
+  }
+}
 
-export default function Home({characters}) {
+export default function Home({ characters }) {
+  console.log(characters)
 
   return (
     <React.Fragment>
