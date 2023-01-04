@@ -17,7 +17,7 @@ async function getCharactersPerPage(req, res) {
   let pagination = await req.params.page;
 
   const page = --pagination;
-  const limit = 20;
+  const limit = 9;
   const skip = page * limit;
 
   const collection = await getCollection(clientPromise, "app", "characters");
