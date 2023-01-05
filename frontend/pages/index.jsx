@@ -20,19 +20,20 @@ const options = ["Ordem de Aparição", "A-Z", "Z-A"];
 const defaultOption = options[0];
 
 export async function getStaticProps() {
-
-  const res = await fetch('https://rick-and-morty-backend.vercel.app/app/characters/1')
-  const characters = await res.json()
+  const res = await fetch(
+    "https://rick-and-morty-backend.vercel.app/app/characters/1"
+  );
+  const characters = await res.json();
 
   return {
     props: {
       characters,
     },
-  }
+  };
 }
 
 export default function Home({ characters }) {
-  console.log(characters)
+  console.log(characters.characters);
 
   return (
     <React.Fragment>
@@ -83,15 +84,14 @@ export default function Home({ characters }) {
           </div>
         </section>
         <section className={styles.section}>
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
+          {characters.characters.map((e) => (
+            <Card
+              name={e.name}
+              image={e.image}
+              status={e.status}
+              specie={e.species}
+            />
+          ))}
         </section>
       </main>
 

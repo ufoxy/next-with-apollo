@@ -100,10 +100,14 @@
   flex-direction: row;
   flex-wrap: wrap;
 
+  /* background: url(../public/space.png);
+  background-repeat: repeat;
+  background-size: none; */
+
   padding: 90px 137px;
   gap: 55px;
 
-  width: 78%;
+  width: 80%;
   min-height: 50em;
   background-color: rgb(244, 244, 244);
   border-bottom-left-radius: 1.45%;
@@ -114,7 +118,7 @@
 .section_search {
   display: flex;
   justify-content: space-between;
-  width: 78%;
+  width: 80%;
   min-height: 6em;
   padding: 0 137px;
   
