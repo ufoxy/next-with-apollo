@@ -86,6 +86,7 @@ export default function Home({ characters }) {
         <section className={styles.section}>
           {characters.characters.map((e) => (
             <Card
+              key={e.id}
               name={e.name}
               image={e.image}
               status={e.status}
