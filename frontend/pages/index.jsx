@@ -2,38 +2,92 @@ import React, { useState } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
-// import rick_and_mort from "../public/rick-and-morty.png";
 import logo from "../public/tt.png";
 import { VscGithub } from "react-icons/vsc";
 import { IoPlanet } from "react-icons/io5";
 import { HiRefresh } from "react-icons/hi";
 import { TbSearch } from "react-icons/tb";
 import axios from "axios";
-
+import InfiniteScroll from "react-infinite-scroll-component";
 import Card from "../components/card.jsx";
-
 import Dropdown from "react-dropdown";
 import "react-dropdown/style.css";
 
 const options = ["Ordem de Aparição", "A-Z", "Z-A"];
-
 const defaultOption = options[0];
+let pages = 1;
 
 export async function getStaticProps() {
   const res = await fetch(
     "https://rick-and-morty-backend.vercel.app/app/characters/1"
   );
-  const characters = await res.json();
+  const character = await res.json();
 
   return {
     props: {
-      characters,
+      character,
     },
   };
 }
 
-export default function Home({ characters }) {
-  console.log(characters.characters);
+export default function Home({ character }) {
+  const [characters, setCharacters] = useState(character.characters);
+  const [autoLoad, setAutoLoad] = useState(false)
+  const [fetchDataTimeout, useFetchDataTimeout] = useState(0)
+
+  function autoLoadFunction() {
+    if(autoLoad === false) {
+      return <section className={styles.section}>
+      {characters.map((e) => (
+        <Card
+          key={e.id}
+          name={e.name}
+          image={e.image}
+          status={e.status}
+          specie={e.species}
+        />
+      ))}
+    </section>
+    } else {
+      return <InfiniteScroll
+      dataLength={characters.length}
+      next={fetchData}
+      hasMore={true}
+      loader={null}
+      endMessage={null}
+    >
+      <section className={styles.section}>
+        {characters.map((e) => (
+          <Card
+            key={e.id}
+            name={e.name}
+            image={e.image}
+            status={e.status}
+            specie={e.species}
+          />
+        ))}
+      </section>
+    </InfiniteScroll>
+    }
+  }
+
+  const fetchDataByName = () => {
+    
+  }
+
+  const fetchData = () => {
+    pages++
+    setTimeout(async () => {
+      const res = await fetch(
+        `http://localhost:8000/app/characters/${pages}`
+      );
+      console.log(pages)
+      const newPosts = await res.json();
+      console.log(newPosts)
+      setCharacters((character) => [...characters, ...newPosts.characters]);
+      useFetchDataTimeout(1000)
+    }, fetchDataTimeout);
+  };
 
   return (
     <React.Fragment>
@@ -83,17 +137,12 @@ export default function Home({ characters }) {
             />
           </div>
         </section>
-        <section className={styles.section}>
-          {characters.characters.map((e) => (
-            <Card
-              key={e.id}
-              name={e.name}
-              image={e.image}
-              status={e.status}
-              specie={e.species}
-            />
-          ))}
-        </section>
+        <div className={styles.section_ct_container}>
+          {autoLoadFunction()}
+          <button className={styles.button} style={{ width: "200px" }} onClick={() => setAutoLoad(true)}>
+            Load more
+          </button>
+        </div>
       </main>
 
       <footer className={styles.footer}></footer>
