@@ -79,13 +79,13 @@ export default function Home({ character }) {
     pages++
     setTimeout(async () => {
       const res = await fetch(
-        `http://localhost:8000/app/characters/${pages}`
+        `https://rick-and-morty-backend.vercel.app/app/characters/${pages}`
       );
       console.log(pages)
       const newPosts = await res.json();
       console.log(newPosts)
       setCharacters((character) => [...characters, ...newPosts.characters]);
-      useFetchDataTimeout(1000)
+      useFetchDataTimeout(500)
     }, fetchDataTimeout);
   };
 
