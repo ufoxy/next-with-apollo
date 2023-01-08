@@ -85,7 +85,7 @@ export default function Home({ character }) {
       const newPosts = await res.json();
       console.log(newPosts)
       setCharacters((character) => [...characters, ...newPosts.characters]);
-      fetchDataTimeout = 1000
+      fetchDataTimeout = 1300
     }, fetchDataTimeout);
   };
 
