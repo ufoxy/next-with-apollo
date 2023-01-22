@@ -33,7 +33,7 @@ export async function getStaticProps() {
 export default function Home({ character }) {
   const [characters, setCharacters] = useState(character.characters);
   const [autoLoad, setAutoLoad] = useState(false)
-  let fetchDataTimeout = 5000
+  let fetchDataTimeout = 2000
 
   function autoLoadFunction() {
     if(autoLoad === false) {
