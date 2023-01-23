@@ -158,7 +158,7 @@ export default function Home({ character }) {
                   strokeWidth={12}
                   strokeColor="#FFF"
                   duration={2000}
-                ></Preloader>
+                />
               ) : (
                 <TbSearch fontSize={26} />
               )}
