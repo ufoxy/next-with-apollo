@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
@@ -16,6 +16,7 @@ import "react-dropdown/style.css";
 const options = ["Ordem de Aparição", "A-Z", "Z-A"];
 const defaultOption = options[0];
 let pages = 1;
+let name = "";
 
 export async function getStaticProps() {
   const res = await fetch(
@@ -33,7 +34,9 @@ export async function getStaticProps() {
 export default function Home({ character }) {
   const [characters, setCharacters] = useState(character.characters);
   const [autoLoad, setAutoLoad] = useState(false)
-  let fetchDataTimeout = 1000
+  const button = useRef()
+  const searchInput = useRef()
+  let fetchDataTimeout = 400
 
   function autoLoadFunction() {
     if(autoLoad === false) {
@@ -72,8 +75,15 @@ export default function Home({ character }) {
   }
 
   const fetchDataByName = () => {
-    
-  }
+    setTimeout(async () => {
+      const res = await fetch(
+        `https://rick-and-morty-backend.vercel.app/app/character/name/${name}`
+      );
+      const newCharacters = await res.json();
+      setCharacters(() => [...newCharacters.character]);
+      button.current.style = "display: none"
+    }, fetchDataTimeout);
+  };
 
   const fetchData = () => {
     pages++
@@ -81,10 +91,8 @@ export default function Home({ character }) {
       const res = await fetch(
         `https://rick-and-morty-backend.vercel.app/app/characters/${pages}`
       );
-      console.log(pages)
-      const newPosts = await res.json();
-      console.log(newPosts)
-      setCharacters((character) => [...characters, ...newPosts.characters]);
+      const newCharacters = await res.json();
+      setCharacters((character) => [...characters, ...newCharacters.characters]);
     }, fetchDataTimeout);
   };
 
@@ -120,8 +128,12 @@ export default function Home({ character }) {
               id=""
               className={styles.search_bar}
               placeholder="Search"
+              ref={searchInput}
             />
-            <button className={styles.button_search} role="button">
+            <button className={styles.button_search} role="button" onClick={() => {
+              name = searchInput.current.value
+              fetchDataByName()
+            }}>
               <TbSearch fontSize={20} />
             </button>
           </div>
@@ -138,7 +150,10 @@ export default function Home({ character }) {
         </section>
         <div className={styles.section_ct_container}>
           {autoLoadFunction()}
-          <button className={styles.button} style={{ width: "200px" }} onClick={() => setAutoLoad(true)}>
+          <button className={styles.button} style={{ width: "200px" }} ref={button} onClick={() => {
+            setAutoLoad(true)
+            button.current.style = "display: none"
+            }}>
             Load more
           </button>
         </div>
