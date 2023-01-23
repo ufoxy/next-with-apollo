@@ -260,7 +260,7 @@
   -webkit-user-select: none;
   touch-action: manipulation;
   vertical-align: baseline;
-  width: auto;
+  width: 75px;
 }
 
 .button_search:hover,
