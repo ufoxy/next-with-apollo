@@ -140,7 +140,7 @@ export default function Home({ character }) {
               setLoadSearchIconButton(true)
               fetchDataByName()
             }}>
-                <Preloader>
+                <Preloader
     use={Oval}
     size={30}
     strokeWidth={15}
