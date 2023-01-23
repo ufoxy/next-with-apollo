@@ -82,7 +82,7 @@ export default function Home({ character }) {
       const newCharacters = await res.json();
       setCharacters(() => [...newCharacters.character]);
       button.current.style = "display: none"
-    }, fetchDataTimeout);
+    }, 0);
   };
 
   const fetchData = () => {
