@@ -7,6 +7,7 @@ import { VscGithub } from "react-icons/vsc";
 import { IoPlanet } from "react-icons/io5";
 import { HiRefresh } from "react-icons/hi";
 import { TbSearch } from "react-icons/tb";
+import { Preloader, Oval } from 'react-preloader-icon';
 import axios from "axios";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Card from "../components/card.jsx";
@@ -34,6 +35,7 @@ export async function getStaticProps() {
 export default function Home({ character }) {
   const [characters, setCharacters] = useState(character.characters);
   const [autoLoad, setAutoLoad] = useState(false)
+  const [loadSearchIconButton, setLoadSearchIconButton] = useState(false)
   const button = useRef()
   const searchInput = useRef()
   let fetchDataTimeout = 400
@@ -78,7 +80,10 @@ export default function Home({ character }) {
     setTimeout(async () => {
       const res = await fetch(
         `https://rick-and-morty-backend.vercel.app/app/character/name/${name}`
-      );
+      ).then(e => {
+        setLoadSearchIconButton(false)
+        return e.data
+      })
       const newCharacters = await res.json();
       setCharacters(() => [...newCharacters.character]);
       button.current.style = "display: none"
@@ -132,9 +137,16 @@ export default function Home({ character }) {
             />
             <button className={styles.button_search} role="button" onClick={() => {
               name = searchInput.current.value
+              setLoadSearchIconButton(true)
               fetchDataByName()
             }}>
-              <TbSearch fontSize={20} />
+                <Preloader>
+    use={Oval}
+    size={30}
+    strokeWidth={15}
+    strokeColor="#262626"
+    duration={2000}
+  />
             </button>
           </div>
 
