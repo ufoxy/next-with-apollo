@@ -7,6 +7,7 @@ import { VscGithub } from "react-icons/vsc";
 import { IoPlanet } from "react-icons/io5";
 import { HiRefresh } from "react-icons/hi";
 import { TbSearch } from "react-icons/tb";
+import { Preloader, Oval } from "react-preloader-icon";
 import axios from "axios";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Card from "../components/card.jsx";
@@ -33,70 +34,78 @@ export async function getStaticProps() {
 
 export default function Home({ character }) {
   const [characters, setCharacters] = useState(character.characters);
-  const [autoLoad, setAutoLoad] = useState(false)
-  const [loadSearchIconButton, setLoadSearchIconButton] = useState(false)
-  const button = useRef()
-  const searchInput = useRef()
-  let fetchDataTimeout = 400
+  const [autoLoad, setAutoLoad] = useState(false);
+  const [loadSearchIconButton, setLoadSearchIconButton] = useState(false);
+  const button = useRef();
+  const searchInput = useRef();
+  let fetchDataTimeout = 400;
 
   function autoLoadFunction() {
-    if(autoLoad === false) {
-      return <section className={styles.section}>
-      {characters.map((e) => (
-        <Card
-          key={e.id}
-          name={e.name}
-          image={e.image}
-          status={e.status}
-          specie={e.species}
-        />
-      ))}
-    </section>
+    if (autoLoad === false) {
+      return (
+        <section className={styles.section}>
+          {characters.map((e) => (
+            <Card
+              key={e.id}
+              name={e.name}
+              image={e.image}
+              status={e.status}
+              specie={e.species}
+            />
+          ))}
+        </section>
+      );
     } else {
-      return <InfiniteScroll
-      dataLength={characters.length}
-      next={fetchData}
-      hasMore={true}
-      loader={null}
-      endMessage={null}
-    >
-      <section className={styles.section}>
-        {characters.map((e) => (
-          <Card
-            key={e.id}
-            name={e.name}
-            image={e.image}
-            status={e.status}
-            specie={e.species}
-          />
-        ))}
-      </section>
-    </InfiniteScroll>
+      return (
+        <InfiniteScroll
+          dataLength={characters.length}
+          next={fetchData}
+          hasMore={true}
+          loader={null}
+          endMessage={null}
+        >
+          <section className={styles.section}>
+            {characters.map((e) => (
+              <Card
+                key={e.id}
+                name={e.name}
+                image={e.image}
+                status={e.status}
+                specie={e.species}
+              />
+            ))}
+          </section>
+        </InfiniteScroll>
+      );
     }
   }
 
   const fetchDataByName = () => {
+    setLoadSearchIconButton(true);
     setTimeout(async () => {
       const res = await fetch(
         `https://rick-and-morty-backend.vercel.app/app/character/name/${name}`
-      ).then(e => {
-        setLoadSearchIconButton(false)
-        return e.data
-      })
+      ).then((res) => {
+        setLoadSearchIconButton(false);
+        return res;
+      });
       const newCharacters = await res.json();
       setCharacters(() => [...newCharacters.character]);
-      button.current.style = "display: none"
+      button.current.style = "display: none";
     }, 0);
   };
 
   const fetchData = () => {
-    pages++
+    pages++;
     setTimeout(async () => {
       const res = await fetch(
         `https://rick-and-morty-backend.vercel.app/app/characters/${pages}`
       );
       const newCharacters = await res.json();
-      setCharacters((character) => [...characters, ...newCharacters.characters]);
+      setCharacters((character) => [
+        ...characters,
+        ...newCharacters.characters,
+      ]);
     }, fetchDataTimeout);
   };
 
@@ -134,11 +143,25 @@ export default function Home({ character }) {
               placeholder="Search"
               ref={searchInput}
             />
-            <button className={styles.button_search} role="button" onClick={() => {
-              name = searchInput.current.value
-              setLoadSearchIconButton(true)
-              fetchDataByName()
-            }}>
+            <button
+              className={styles.button_search}
+              role="button"
+              onClick={() => {
+                name = searchInput.current.value;
+                fetchDataByName();
+              }}
+            >
+              {loadSearchIconButton ? (
+                <Preloader
+                  use={Oval}
+                  size={22}
+                  strokeWidth={12}
+                  strokeColor="#FFF"
+                  duration={2000}
+                />
+              ) : (
+                <TbSearch fontSize={26} />
+              )}
             </button>
           </div>
 
@@ -154,10 +177,15 @@ export default function Home({ character }) {
         </section>
         <div className={styles.section_ct_container}>
           {autoLoadFunction()}
-          <button className={styles.button} style={{ width: "200px" }} ref={button} onClick={() => {
-            setAutoLoad(true)
-            button.current.style = "display: none"
-            }}>
+          <button
+            className={styles.button}
+            style={{ width: "200px" }}
+            ref={button}
+            onClick={() => {
+              setAutoLoad(true);
+              button.current.style = "display: none";
+            }}
+          >
             Load more
           </button>
         </div>
