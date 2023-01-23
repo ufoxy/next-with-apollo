@@ -7,7 +7,6 @@ import { VscGithub } from "react-icons/vsc";
 import { IoPlanet } from "react-icons/io5";
 import { HiRefresh } from "react-icons/hi";
 import { TbSearch } from "react-icons/tb";
-import { Preloader, Oval } from 'react-preloader-icon';
 import axios from "axios";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Card from "../components/card.jsx";
@@ -140,13 +139,6 @@ export default function Home({ character }) {
               setLoadSearchIconButton(true)
               fetchDataByName()
             }}>
-                <Preloader
-    use={Oval}
-    size={30}
-    strokeWidth={15}
-    strokeColor="#262626"
-    duration={2000}
-  />
             </button>
           </div>
 
