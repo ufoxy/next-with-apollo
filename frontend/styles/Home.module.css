@@ -295,4 +295,5 @@
 .dropdown {
   height: 40px;
   width: 250px;
+  z-index: 999;
 }

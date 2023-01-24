@@ -15,10 +15,10 @@
     "next": "13.0.6",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-dropdown": "^1.11.0",
     "react-icons": "^4.7.1",
     "react-infinite-scroll-component": "^6.1.0",
     "react-preloader-icon": "^1.0.0",
+    "react-select": "^5.7.0",
     "sass": "^1.56.2"
   }
 }

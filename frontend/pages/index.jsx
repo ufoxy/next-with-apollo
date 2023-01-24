@@ -11,11 +11,8 @@ import { Preloader, Oval } from "react-preloader-icon";
 import axios from "axios";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Card from "../components/card.jsx";
-import Dropdown from "react-dropdown";
-import "react-dropdown/style.css";
+import Select from "react-select";
 
-const options = ["Ordem de Aparição", "A-Z", "Z-A"];
-const defaultOption = options[0];
 let pages = 1;
 let name = "";
 
@@ -36,9 +33,41 @@ export default function Home({ character }) {
   const [characters, setCharacters] = useState(character.characters);
   const [autoLoad, setAutoLoad] = useState(false);
   const [loadSearchIconButton, setLoadSearchIconButton] = useState(false);
+  const [options, setOptions] = useState([
+    {
+      label: "Default Order",
+      value: "Default Order",
+      className: "custom-class",
+    },
+    { label: "A-Z", value: "A-Z", className: "custom-class" },
+    { label: "Z-A", value: "Z-A", className: "awesome-class" },
+  ])
   const button = useRef();
   const searchInput = useRef();
+  const dropdown = useRef();
   let fetchDataTimeout = 400;
+
+  const handleChange = async (selectedOption) => {
+    if (selectedOption.value === "A-Z") {
+      console.log("A-Z");
+      const order = await characters.sort((a, b) => {
+        return a.name < b.name ? -1 : a.nome > b.nome ? 1 : 0;
+      });
+      setCharacters([...order]);
+    } else if (selectedOption.value === "Z-A") {
+      console.log("Z-A");
+      const order = characters.sort((a, b) => {
+        return a.name > b.name ? -1 : a.nome < b.nome ? 1 : 0;
+      });
+      setCharacters([...order]);
+    } else if (selectedOption.value === "Default Order") {
+      console.log("Default Order");
+      const order = characters.sort((a, b) => {
+        return a.id < b.id ? -1 : a.id > b.id ? 1 : 0;
+      });
+      setCharacters([...order]);
+    }
+  };
 
   function autoLoadFunction() {
     if (autoLoad === false) {
@@ -115,7 +144,7 @@ export default function Home({ character }) {
         <nav className={styles.nav}>
           {" "}
           <h1 className={styles.h1_logo}>
-            <Image src={logo} width={200} className={styles.h1_logo} />
+            <Image src={logo} width={200} className={styles.h1_logo} alt={"Rick and Morty Wallpaper"} />
           </h1>
           <div className={styles.nav_buttons}>
             <IoPlanet className={styles.planet_icon}></IoPlanet>
@@ -148,6 +177,7 @@ export default function Home({ character }) {
               role="button"
               onClick={() => {
                 name = searchInput.current.value;
+                dropdown.current.setValue("Default Order")
                 fetchDataByName();
               }}
             >
@@ -167,11 +197,12 @@ export default function Home({ character }) {
 
           <div className={styles.dropdown_container}>
             <p className={styles.dropdown_p}>Organizar por:</p>
-            <Dropdown
-              options={options}
-              value={defaultOption}
-              placeholder="Select an option"
+            <Select
               className={styles.dropdown}
+              options={options}
+              placeholder={"Default Order"}
+              ref={dropdown}
+              onChange={handleChange}
             />
           </div>
         </section>
