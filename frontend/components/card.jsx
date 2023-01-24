@@ -23,6 +23,7 @@ function Card({ name, image, status, specie }) {
               height="280"
               priority={true}
               className={styles.image}
+              alt={name}
             />
           </div>
           <div className={styles.info_container}>
