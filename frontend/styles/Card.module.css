@@ -5,8 +5,7 @@
 
   width: 280px;
   background-color: rgb(255, 255, 255);
-
-  border-radius: 15px;
+  border-radius: 20px;
 
   overflow: hidden;
 
@@ -17,7 +16,7 @@
 
 .article_div {
   box-shadow: rgba(0, 0, 0, 0.1) -4px 9px 25px -6px;
-  border-radius: 15px;
+  border-radius: 20px;
   margin: 10px;
 }
 
@@ -39,12 +38,10 @@
 }
 
 .info_container {
-  /* min-height: 75px; */
-  /* width: 275px; */
   padding: 10px 0 10px 20px;
 
-  border-bottom-left-radius: 15px;
-  border-bottom-right-radius: 15px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
 
   background-color: rgb(255, 255, 255);
 
