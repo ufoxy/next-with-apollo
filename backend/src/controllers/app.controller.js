@@ -67,16 +67,15 @@ async function getCharacterById(req, res) {
 
 async function getCharacterByName(req, res) {
   let name = String(await req.params.name);
-  console.log(name);
   const reg = new RegExp(`^${name}`, "i");
 
   const collection = await getCollection(clientPromise, "app", "characters");
-  const character = await collection.find({ name: { $regex: reg } }).toArray();
-  console.log(character);
+  let character = await collection.find({ name: { $regex: reg } }).toArray();
 
-  if (!character) {
-    return res.status(404).json({ msg: "Personagem não encontrado!" });
-  }
+  // if (!character) {
+  //   return res.status(404).json({ msg: "Personagem não encontrado!" });
+  //   character = await fetch();
+  // }
 
   res.status(200).json({ character });
 }
