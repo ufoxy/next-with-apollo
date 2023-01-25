@@ -27,7 +27,6 @@ async function getRandomCharacters(req, res) {
   if (!characters) {
     return res.status(404).json({ msg: "Lista de personagens indisponível!" });
   }
-
   res.status(200).json({ characters });
 }
 
@@ -61,7 +60,6 @@ async function getCharacterById(req, res) {
   if (!character) {
     return res.status(404).json({ msg: "Personagem não encontrado!" });
   }
-
   res.status(200).json({ character });
 }
 
@@ -71,11 +69,6 @@ async function getCharacterByName(req, res) {
 
   const collection = await getCollection(clientPromise, "app", "characters");
   let character = await collection.find({ name: { $regex: reg } }).toArray();
-
-  // if (!character) {
-  //   return res.status(404).json({ msg: "Personagem não encontrado!" });
-  //   character = await fetch();
-  // }
 
   res.status(200).json({ character });
 }
