@@ -207,7 +207,7 @@ export default function Home({ character }) {
           </h1>
           <div className={styles.nav_buttons}>
             <Link
-              rel="preconnect"
+              // rel="preconnect"
               target={"_blank"}
               href={
                 "https://github.com/ufoxy/rick-and-morty/blob/main/backend/README.md"
@@ -216,7 +216,7 @@ export default function Home({ character }) {
               <IoPlanet className={styles.planet_icon}></IoPlanet>
             </Link>
             <Link
-              rel="preconnect"
+              // rel="preconnect"
               target={"_blank"}
               href={"https://github.com/ufoxy/rick-and-morty"}
             >
