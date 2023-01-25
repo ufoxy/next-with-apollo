@@ -30,7 +30,13 @@ function Card({ name, image, status, specie }) {
             <h2>{name}</h2>
             <div className={styles.flex}>
               <MdCircle
-                color={status === "Alive" ? "green" : "red"}
+                color={
+                  status === "Alive"
+                    ? "#00ff00"
+                    : status === "Dead"
+                    ? "#ff0000"
+                    : "#808080"
+                }
                 className={styles.circle}
               />
               <p>
