@@ -206,10 +206,20 @@ export default function Home({ character }) {
             />
           </h1>
           <div className={styles.nav_buttons}>
-            <Link rel="preconnect" href={"https://rick-and-morty-backend.vercel.app/"}>
+            <Link
+              rel="preconnect"
+              target={"_blank"}
+              href={
+                "https://github.com/ufoxy/rick-and-morty/blob/main/backend/README.md"
+              }
+            >
               <IoPlanet className={styles.planet_icon}></IoPlanet>
             </Link>
-            <Link rel="preconnect" href={"https://github.com/ufoxy/rick-and-morty"}>
+            <Link
+              rel="preconnect"
+              target={"_blank"}
+              href={"https://github.com/ufoxy/rick-and-morty"}
+            >
               <VscGithub className={styles.github_icon}></VscGithub>
             </Link>
           </div>
