@@ -8,11 +8,11 @@ const app = express();
 const cors = require("cors");
 const corsOptions = {
   origin: "*",
-  credentials: true, //access-control-allow-credentials:true
+  credentials: true,
   optionSuccessStatus: 200,
 };
 
-app.use(cors(corsOptions)); // Use this after the variable declaration
+app.use(cors(corsOptions));
 
 app.use(express.json());
 
