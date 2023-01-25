@@ -2,7 +2,6 @@
   width: 100%;
   height: calc(428px + 75px);
   overflow: hidden;
-  
 }
 
 .nav {
@@ -14,8 +13,6 @@
   padding: 0 35px;
   height: 75px;
   background-color: white;
-
-  /* box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px px, rgba(0, 0, 0, 0.2) 0px px 0px inset; */
 }
 
 .h1_logo {
@@ -57,17 +54,12 @@
   width: 120px;
 }
 
-.h1_logo {
-
-}
-
 .background {
   height: 425px;
   width: 100%;
   background-image: url(../public/rick-and-mort.png);
   background-size: cover;
   background-repeat: no-repeat;
-  /* box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; */
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px;
 }
 
@@ -85,12 +77,11 @@
   justify-content: center;
   align-items: center;
 
-  background-color: #FFF;
+  background-color: #fff;
   width: 100%;
   padding: 100px 0;
-  /* height: 130vh; */
-  /* box-shadow: 0 20px 10px -20px rgba(0,0,0,0.45) inset; */
-  box-shadow: 0 20px 10px -20px rgba(0,0,0,0.45) inset, 0 -20px 10px -20px rgba(0,0,0,0.45) inset;
+  box-shadow: 0 20px 10px -20px rgba(0, 0, 0, 0.45) inset,
+    0 -20px 10px -20px rgba(0, 0, 0, 0.45) inset;
 }
 
 .section {
@@ -101,10 +92,6 @@
 
   gap: 55px;
   overflow-y: hidden;
-
-  /* background: url(../public/space.png);
-  background-repeat: repeat;
-  background-size: none; */
 }
 
 .section_ct_container {
@@ -113,13 +100,11 @@
   align-items: center;
   gap: 60px;
 
-  padding: 60px 137px;
+  padding: 70px 137px;
 
   width: 85%;
   min-height: 50em;
   background-color: rgb(244, 244, 244);
-  border-bottom-left-radius: 1.45%;
-  border-bottom-right-radius: 1.45%;
 }
 
 .button {
@@ -134,10 +119,8 @@
   width: 85%;
   min-height: 6em;
   padding: 0 137px;
-  
-  background-color: rgb(56, 56, 56);
 
-  
+  background-color: rgb(56, 56, 56);
 }
 
 .search_container {
@@ -151,7 +134,7 @@
   width: 200px;
   height: 40px;
 
-  border-radius: .25rem;
+  border-radius: 0.25rem;
   padding-left: 15px;
   border: none;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
@@ -168,9 +151,9 @@
 .button {
   appearance: none;
   background-color: #2ea44f;
-  border: 1px solid rgba(27, 31, 35, .15);
-  border-radius: .25rem;
-  box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
+  border: 1px solid rgba(27, 31, 35, 0.15);
+  border-radius: 0.25rem;
+  box-shadow: rgba(27, 31, 35, 0.1) 0 1px 0;
   box-sizing: border-box;
   color: #fff;
   cursor: pointer;
@@ -179,7 +162,8 @@
   align-items: center;
   height: 40px;
   width: 140px;
-  font-family: -apple-system,system-ui,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
+  font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial,
+    sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
   font-size: 14px;
   font-weight: 600;
   line-height: 20px;
@@ -206,52 +190,41 @@
 }
 
 .button:focus {
-  box-shadow: rgba(46, 164, 79, .4) 0 0 0 3px;
+  box-shadow: rgba(46, 164, 79, 0.4) 0 0 0 3px;
   outline: none;
 }
 
 .button:disabled {
   background-color: #94d3a2;
-  border-color: rgba(27, 31, 35, .1);
-  color: rgba(255, 255, 255, .8);
+  border-color: rgba(27, 31, 35, 0.1);
+  color: rgba(255, 255, 255, 0.8);
   cursor: default;
 }
 
 .button:active {
   background-color: #298e46;
-  box-shadow: rgba(20, 70, 32, .2) 0 1px 0 inset;
+  box-shadow: rgba(20, 70, 32, 0.2) 0 1px 0 inset;
 }
-
-.footer {
-  width: 100%;
-  height: 150px;
-  background-color: #1e1e1e;
-
-  background: url(../public/space.png);
-  background-repeat: repeat;
-  background-size: contain;
-}
-
-/* -------------- */
 
 .button_search {
   align-items: center;
   background-clip: padding-box;
   background-color: #fa6400;
   border: 1px solid transparent;
-  border-radius: .25rem;
+  border-radius: 0.25rem;
   box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
   box-sizing: border-box;
   color: #fff;
   cursor: pointer;
   display: inline-flex;
-  font-family: system-ui,-apple-system,system-ui,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-family: system-ui, -apple-system, system-ui, "Helvetica Neue", Helvetica,
+    Arial, sans-serif;
   font-size: 16px;
   font-weight: 600;
   justify-content: center;
   line-height: 1.25;
   height: 40px;
-  padding: calc(.875rem - 1px) calc(1.5rem - 1px);
+  padding: calc(0.875rem - 1px) calc(1.5rem - 1px);
   position: relative;
   text-decoration: none;
   transition: all 250ms;
@@ -274,7 +247,7 @@
 
 .button_search:active {
   background-color: #c85000;
-  box-shadow: rgba(0, 0, 0, .06) 0 2px 4px;
+  box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
   transform: translateY(0);
 }
 
@@ -286,7 +259,7 @@
 }
 
 .dropdown_p {
-  color: #FFF;
+  color: #fff;
   font-weight: 400;
   opacity: 70%;
 }
@@ -295,4 +268,16 @@
   height: 40px;
   width: 250px;
   z-index: 999;
+}
+
+/* --------------------------------- */
+
+.footer {
+  width: 100%;
+  height: 250px;
+  background-color: #1e1e1e;
+
+  background: url(../public/space.png);
+  background-repeat: repeat;
+  background-size: contain;
 }
