@@ -12,6 +12,7 @@ import axios from "axios";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Card from "../components/card.jsx";
 import Select from "react-select";
+import Link from "next/link";
 
 let pages = 1;
 let name = "";
@@ -117,7 +118,9 @@ export default function Home({ character }) {
       setRandomCharacters(true);
       const page = Math.floor(Math.random() * (92 - 1) + 1);
       setPagesRandomized([...pagesRandomized, page]);
-      const res = await fetch(`http://localhost:8000/app/characters/${page}`);
+      const res = await fetch(
+        `https://rick-and-morty-backend.vercel.app/app/characters/${page}`
+      );
 
       const newCharacters = await res.json();
       setCharacters(() => [...newCharacters.characters]);
@@ -129,15 +132,25 @@ export default function Home({ character }) {
     setLoadSearchIconButton(true);
     setRandomCharacters(false);
     setTimeout(async () => {
+      if (!name) name = null;
       const res = await fetch(
-        `https://rick-and-morty-backend.vercel.app/app/character/name/${name}`
+        `http://localhost:8000/app/character/name/${name}`
       ).then((res) => {
         setLoadSearchIconButton(false);
         return res;
       });
-      const newCharacters = await res.json();
-      setCharacters(() => [...newCharacters.character]);
-      button.current.style = "display: none";
+      let newCharacters = await res.json();
+      if (newCharacters.character.length === 0) {
+        const res = await fetch(
+          `https://rick-and-morty-backend.vercel.app/app/characters/1`
+        );
+        newCharacters = await res.json();
+        setCharacters(() => [...newCharacters.characters]);
+        button.current.style = "display: block";
+      } else {
+        setCharacters(() => [...newCharacters.character]);
+        button.current.style = "display: none";
+      }
     }, 0);
   };
 
@@ -154,11 +167,15 @@ export default function Home({ character }) {
             return;
           } else {
             setPagesRandomized([...pagesRandomized, page]);
-            res = await fetch(`http://localhost:8000/app/characters/${page}`);
+            res = await fetch(
+              `https://rick-and-morty-backend.vercel.app/app/characters/${page}`
+            );
           }
         } else {
           setPagesRandomized([...pagesRandomized, page]);
-          res = await fetch(`http://localhost:8000/app/characters/${page}`);
+          res = await fetch(
+            `https://rick-and-morty-backend.vercel.app/app/characters/${page}`
+          );
         }
       } else {
         pages++;
@@ -189,9 +206,12 @@ export default function Home({ character }) {
             />
           </h1>
           <div className={styles.nav_buttons}>
-            <IoPlanet className={styles.planet_icon}></IoPlanet>
-
-            <VscGithub className={styles.github_icon}></VscGithub>
+            <Link rel="preconnect" href={"https://rick-and-morty-backend.vercel.app/"}>
+              <IoPlanet className={styles.planet_icon}></IoPlanet>
+            </Link>
+            <Link rel="preconnect" href={"https://github.com/ufoxy/rick-and-morty"}>
+              <VscGithub className={styles.github_icon}></VscGithub>
+            </Link>
           </div>
         </nav>
         <div className={styles.background}>
@@ -217,6 +237,13 @@ export default function Home({ character }) {
               className={styles.search_bar}
               placeholder="Search"
               ref={searchInput}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  name = searchInput.current.value;
+                  dropdown.current.setValue("Default Order");
+                  fetchDataByName();
+                }
+              }}
             />
             <button
               className={styles.button_search}
@@ -242,7 +269,7 @@ export default function Home({ character }) {
           </div>
 
           <div className={styles.dropdown_container}>
-            <p className={styles.dropdown_p}>Organizar por:</p>
+            <p className={styles.dropdown_p}>Order by:</p>
             <Select
               className={styles.dropdown}
               options={options}
@@ -252,7 +279,7 @@ export default function Home({ character }) {
             />
           </div>
         </section>
-        <div className={styles.section_ct_container}>
+        <section className={styles.section_ct_container}>
           {autoLoadFunction()}
           <button
             className={styles.button}
@@ -265,7 +292,7 @@ export default function Home({ character }) {
           >
             Load more
           </button>
-        </div>
+        </section>
       </main>
 
       <footer className={styles.footer}></footer>
