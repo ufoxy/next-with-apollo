@@ -33,6 +33,7 @@ export default function Home({ character }) {
   const [characters, setCharacters] = useState(character.characters);
   const [autoLoad, setAutoLoad] = useState(false);
   const [loadSearchIconButton, setLoadSearchIconButton] = useState(false);
+  const [randomCharacters, setRandomCharacters] = useState(false);
   const [options, setOptions] = useState([
     {
       label: "Default Order",
@@ -41,16 +42,16 @@ export default function Home({ character }) {
     },
     { label: "A-Z", value: "A-Z", className: "custom-class" },
     { label: "Z-A", value: "Z-A", className: "awesome-class" },
-  ])
+  ]);
+  const [pagesRandomized, setPagesRandomized] = useState([]);
   const button = useRef();
   const searchInput = useRef();
   const dropdown = useRef();
-  let fetchDataTimeout = 400;
 
-  const handleChange = async (selectedOption) => {
+  const handleChange = (selectedOption) => {
     if (selectedOption.value === "A-Z") {
       console.log("A-Z");
-      const order = await characters.sort((a, b) => {
+      const order = characters.sort((a, b) => {
         return a.name < b.name ? -1 : a.nome > b.nome ? 1 : 0;
       });
       setCharacters([...order]);
@@ -109,8 +110,24 @@ export default function Home({ character }) {
     }
   }
 
+  const fetchRandomCharacters = () => {
+    setTimeout(async () => {
+      button.current.style = "display: none";
+      setCharacters([]);
+      setRandomCharacters(true);
+      const page = Math.floor(Math.random() * (92 - 1) + 1);
+      setPagesRandomized([...pagesRandomized, page]);
+      const res = await fetch(`http://localhost:8000/app/characters/${page}`);
+
+      const newCharacters = await res.json();
+      setCharacters(() => [...newCharacters.characters]);
+      button.current.style = "display: block";
+    }, 0);
+  };
+
   const fetchDataByName = () => {
     setLoadSearchIconButton(true);
+    setRandomCharacters(false);
     setTimeout(async () => {
       const res = await fetch(
         `https://rick-and-morty-backend.vercel.app/app/character/name/${name}`
@@ -125,17 +142,37 @@ export default function Home({ character }) {
   };
 
   const fetchData = () => {
-    pages++;
+    let page = Math.floor(Math.random() * (92 - 1) + 1);
+
     setTimeout(async () => {
-      const res = await fetch(
-        `https://rick-and-morty-backend.vercel.app/app/characters/${pages}`
-      );
+      let res = "";
+      if (randomCharacters === true) {
+        if (pagesRandomized.includes(page)) {
+          page = Math.floor(Math.random() * (92 - 1) + 1);
+          if (pagesRandomized.includes(page)) {
+            button.current.style = "display: none";
+            return;
+          } else {
+            setPagesRandomized([...pagesRandomized, page]);
+            res = await fetch(`http://localhost:8000/app/characters/${page}`);
+          }
+        } else {
+          setPagesRandomized([...pagesRandomized, page]);
+          res = await fetch(`http://localhost:8000/app/characters/${page}`);
+        }
+      } else {
+        pages++;
+        res = await fetch(
+          `https://rick-and-morty-backend.vercel.app/app/characters/${pages}`
+        );
+      }
+
       const newCharacters = await res.json();
       setCharacters((character) => [
         ...characters,
         ...newCharacters.characters,
       ]);
-    }, fetchDataTimeout);
+    }, 400);
   };
 
   return (
@@ -144,7 +181,12 @@ export default function Home({ character }) {
         <nav className={styles.nav}>
           {" "}
           <h1 className={styles.h1_logo}>
-            <Image src={logo} width={200} className={styles.h1_logo} alt={"Rick and Morty Wallpaper"} />
+            <Image
+              src={logo}
+              width={200}
+              className={styles.h1_logo}
+              alt={"Rick and Morty Wallpaper"}
+            />
           </h1>
           <div className={styles.nav_buttons}>
             <IoPlanet className={styles.planet_icon}></IoPlanet>
@@ -160,7 +202,11 @@ export default function Home({ character }) {
       <main className={styles.main}>
         <section className={styles.section_search}>
           <div className={styles.search_container}>
-            <button className={styles.button} role="button">
+            <button
+              className={styles.button}
+              role="button"
+              onClick={fetchRandomCharacters}
+            >
               <HiRefresh fontSize={20}></HiRefresh>
               Surprise Me!
             </button>
@@ -177,7 +223,7 @@ export default function Home({ character }) {
               role="button"
               onClick={() => {
                 name = searchInput.current.value;
-                dropdown.current.setValue("Default Order")
+                dropdown.current.setValue("Default Order");
                 fetchDataByName();
               }}
             >
