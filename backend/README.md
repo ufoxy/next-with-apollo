@@ -1,16 +1,17 @@
-<h1 align="center">Documentation Rick and Morty API ☁️
-</h1>
+<h1 align="center"> Documentation Rick and Morty API ☁️ </h1>
 
-  <div align="center"><img src="https://user-images.githubusercontent.com/99100930/214681373-ecb58386-3fc5-4bbc-9d09-9b6df60ba30a.png"/></div>
-  
+<div align="center">
+  <img src="https://user-images.githubusercontent.com/99100930/214708483-8e3ead17-4627-425b-b5c7-d94db454ea1a.png"/>
+</div>
+
 ## Description 💬
 
-<p> Essa é uma pequena documentação da API usada no projeto Rick and Morty Construída para uso pessoal de @ufoxy. Sinta-se livre para usar ou testar a API. Deixarei um Link que podera ajudalo a entender como fazer as requisições </p>
+<p> This is a small documentation of the API used in the Rick and Morty project built for personal use by @ufoxy. Feel free to use or test an API. I'll leave a link that can help you understand how to make requests. </p>
 
 <p> ~ https://rick-and-morty-backend.vercel.app/ </p>
 
-<p> Quero detalhar que nem todas as API e/ou dados listadas estão em uso no projeto, mas foram desenvolvidas para possiveis necessidades no futuro do projeto. </p>
-<p> O uso da API está detalhada dentro dela, e os links também</p>
+<p> I want to detail that not all API and/or data listed are in use in the project, but were developed for possible needs in the future of the project. </p>
+<p> The API usage is detailed within it, and so are the links. </p>
 
 ## Technologies/Library 🛠️📚
 
@@ -20,4 +21,5 @@
 - MongoDB
 - Node.js
 - Express.js
+
 ___
