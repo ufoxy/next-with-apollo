@@ -90,6 +90,7 @@
   flex-direction: row;
   flex-wrap: wrap;
 
+  max-width: 1120px;
   gap: 55px;
   overflow-y: hidden;
 }
@@ -102,9 +103,13 @@
 
   padding: 70px 137px;
 
+  width: 1300px;
+  max-width: 1400px;
   width: 85%;
   min-height: 50em;
   background-color: rgb(244, 244, 244);
+
+  box-shadow: 0 0.50rem 1rem hsl(0 0% 0% / 20%);
 }
 
 .button {
@@ -116,11 +121,14 @@
 .section_search {
   display: flex;
   justify-content: space-between;
+  width: 1300px;
+  max-width: 1400px;
   width: 85%;
   min-height: 6em;
   padding: 0 137px;
 
   background-color: rgb(56, 56, 56);
+  box-shadow: 0 0.50rem 1rem hsl(0 0% 0% / 20%);
 }
 
 .search_container {
