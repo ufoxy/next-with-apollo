@@ -4,7 +4,7 @@
   justify-content: space-between;
 
   width: 280px;
-  background-color: rgb(255, 255, 255);
+  background-color: rgba(244, 244, 244, 0.773);
   border-radius: 20px;
 
   overflow: hidden;
@@ -43,7 +43,7 @@
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
 
-  background-color: rgb(255, 255, 255);
+  background-color: rgba(244, 244, 244, 0.773);
 
   z-index: 2;
 }
