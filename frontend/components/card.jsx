@@ -9,7 +9,6 @@ function Card({ name, image, status, specie }) {
     const abv = name.split(" ").filter((e) => (e == nm ? false : true));
     abv.map((e) => (nm += ` ${e.substr(0, 1)}.`));
     nm.length > 19 ? (name = `${nm.substr(0, 19)} ...`) : (name = nm);
-    // name = nm;
   } // Abrevia nomes grandes
 
   return (
