@@ -134,7 +134,7 @@ export default function Home({ character }) {
     setTimeout(async () => {
       if (!name) name = null;
       const res = await fetch(
-        `http://localhost:8000/app/character/name/${name}`
+        `https://rick-and-morty-backend.vercel.app/app/character/name/${name}`
       ).then((res) => {
         setLoadSearchIconButton(false);
         return res;
@@ -303,7 +303,17 @@ export default function Home({ character }) {
         </section>
       </main>
 
-      <footer className={styles.footer}></footer>
+      <footer className={styles.footer}>
+        <Image
+          src={logo}
+          width={200}
+          className={styles.footer_logo}
+          alt={"Rick and Morty Wallpaper"}
+        />
+        <section>
+          <p className={styles.footer_p}>Made with ❤️ by <Link href={"https://github.com/ufoxy"}><span className={styles.footer_profile}>@ufoxy</span></Link></p>
+        </section>
+      </footer>
     </React.Fragment>
   );
 }
