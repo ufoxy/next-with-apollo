@@ -142,6 +142,8 @@
   width: 200px;
   height: 40px;
 
+  color: #1e1e1e;
+  background-color: #FFF;
   border-radius: 0.25rem;
   padding-left: 15px;
   border: none;
@@ -276,6 +278,7 @@
   height: 40px;
   width: 250px;
   z-index: 999;
+  color: #1e1e1e;
 }
 
 /* --------------------------------- */
